@@ -32,7 +32,7 @@ export function AuthProvider({
   initialUsername = null,
 }: AuthProviderProps) {
   const [user, setUser] = useState<AuthUser | null>(
-    initialUsername ? { username: initialUsername } : null
+    initialUsername ? { username: initialUsername } : null,
   );
 
   async function login(username: string, password: string) {

@@ -1,19 +1,9 @@
 import { Timeline } from "@/components/Timeline";
-import { YweetCard } from "../components/YweetCard";
+// import { YweetCard } from "../components/YweetCard";
+import { TimelineFeed } from "@/components/TimelineFeed";
+import type { Yweet } from "@/types/yweet";
 
 // src/app/page.tsx
-
-type Yweet = {
-  id: number;
-  content: string;
-  user: {
-    username: string;
-    avator: string;
-  };
-};
-
-// レスポンスは配列そのもの
-type TimelineResponse = Yweet[];
 
 /**
  * タイムライン（ホーム）
@@ -28,20 +18,14 @@ export default async function Home() {
   // console.log(response);
 
   // bodyの中身をみる
-  const yweets = (await response.json()) as TimelineResponse;
+  // const yweets = (await response.json()) as TimelineResponse;
+  const yweets = (await response.json()) as Yweet[]:
 
   console.log(yweets);
 
   return (
     <Timeline>
-      {yweets.map((yweet) => (
-        <YweetCard
-          key={yweet.id}
-          username={yweet.user.username}
-          content={yweet.content}
-          avatarUrl={yweet.user.avatar}
-        />
-      ))}
+      <TimelineFeed initialYweets={yweets} />
     </Timeline>
   );
 }
